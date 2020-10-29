@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+
+    <h5> potin numéro <%= @gossip %>: </h5> </br>
+    <h6> <%=@gossip_id.title %> </h6> </br>
+    <h7> l'auteur est: <%= link_to "#{@gossip_id.user.first_name}"%></7>
+    <p> <%=@gossip_id.created_at %> </p> </br>
+    <p><U>Contenu du potin:</U> </p> </br>
+    <p> <%=@gossip_id.content %> </p> </br>
+
+    <%=link_to "Editer l'article", edit_gossip_path, class:"btn btn-success" %>
+
+    <a href="<%=  gossips_path(@gossip) %>" class="btn btn-danger"  data-confirm="Etes-vous sur ?" data-method="DELETE"> Supprimer </a>
+    </br>
+
+  </div>
+</div>
