@@ -14,7 +14,7 @@ class GossipsController < ApplicationController
 
   def create
 
-    @post = Gossip.new(title: params[:title], content: params[:content], tag_id: params[:tag_id])
+    @post = Gossip.new(title: params[:title], content: params[:content])
     @post.user = User.find_by(id: session[:user_id])
     
 
