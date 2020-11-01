@@ -13,9 +13,7 @@
  *= require_tree .
  *= require_self
  */
-
  body{
-  text-align: center;
-  background-image:
-                   url("gossip-time-nico.png");
-}
+    background-image: url('gossip.jpeg');
+    background-position: cover;
+ }

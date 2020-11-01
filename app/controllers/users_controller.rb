@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     
     if @user.save
       puts "user saved"
-      redirect_to gossips_path, notice: "Tu as créés ton profile bitch!"
+      redirect_to gossips_path, notice: "Tu as créés ton profile de commère!"
 
     else
       puts "user erreur"

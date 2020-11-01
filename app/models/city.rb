@@ -1,5 +1,9 @@
 class City < ApplicationRecord
-  validates :name, presence: true
-  validates :zip_code, presence: true
-  has_many :users
+    has_many :users
+    validates :name,
+        presence: true,
+        uniqueness: true
+    validates :zip_code,
+        presence: true,
+        uniqueness: true
 end

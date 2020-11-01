@@ -5,14 +5,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all'%>
+    <%= javascript_pack_tag 'application'%>
   </head>
-
 
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,8 +22,24 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="<%=gossips_path %>">Home<span class="sr-only">(current)</span></a>
+        <li>
+        <%if logged_in? == true%>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Log in / Inscription
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="<%=new_session_path %>">Log in</a>
+              <a class="dropdown-item" href="<%=new_user_path%>">Inscription</a>
+            </div>
+          </div>
+        <%else%>
+          <div class="btn-group">
+            
+              <%= link_to "Se déconnecter", session_path(session.id), method: :delete, class:"btn btn-outline-primary dropdown-toggle" %>
+            
+          </div>
+        <%end%>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%=team_path%>">Team</a>
@@ -32,37 +47,17 @@
         <li class="nav-item">
           <a class="nav-link" href="<%=contact_path%>">Contact</a>
         </li>
+
+
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
-
-      <% if logged_in? == true %>
-        <div class="btn-group">
-          <button type="button" class="btn btn-info">S'inscrire / Se connecter</button>
-          <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu">
-            <%= link_to "S'inscription", new_user_path, class:"dropdown-item" %> 
-            <%= link_to "Se connecter", new_session_path, class:"dropdown-item" %> 
-          </div>
-        </div>
-        </nav>
-      <% else %>
-        <li class='nav-item active'>
-            <%= link_to "Se déconnecter", session_path(session.id), method: :delete, class:"nav-link" %> 
-        </li>
-      <% end %>
-      </div>
-      </nav>  
-
-
-    
+    </nav>
     <% flash.each do |type, msg| %>
-      <div class="alert alert-success" role="alert">
+      <div class="alert alert-danger" role="alert">
         <%= msg %>
       </div>
     <% end %>
